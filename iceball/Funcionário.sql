@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS func (
   	endereco TEXT
   );
   
-  INSERT INTO func (nome, funcao, cpf, rg, tel, email , data_nascimento , data_contrato , endereco)
+  INSERT INTO func (nome, função, cpf, rg, tel, email , data_nascimento , data_contrato , endereco)
   VALUES (
     'Isadora',
     'dona',
