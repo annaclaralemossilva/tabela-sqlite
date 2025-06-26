@@ -134,20 +134,13 @@ CREATE TABLE IF NOT EXISTS enderecos (
 
 -- Tabela de Usuários do Sistema
 CREATE TABLE IF NOT EXISTS usuarios (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMA0000000000000000000000000000000000000000000000000000000000
+  
+  RY KEY AUTOINCREMENT,
     nome TEXT,
     email TEXT UNIQUE,
     senha TEXT,
     tipo TEXT CHECK(tipo IN ('admin', 'funcionario'))
-);
-
--- Tabela de Devoluções
-CREATE TABLE IF NOT EXISTS devolucoes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    venda_id INTEGER,
-    data_devolucao DATE,
-    motivo TEXT,
-    FOREIGN KEY (venda_id) REFERENCES vendas(id)
 );
 
 -- Tabela de Notas Fiscais
@@ -158,15 +151,6 @@ CREATE TABLE IF NOT EXISTS notas_fiscais (
     valor REAL,
     data_emissao DATE,
     FOREIGN KEY (compra_id) REFERENCES compras(id)
-);
-
--- Tabela de Carrinho Temporário
-CREATE TABLE IF NOT EXISTS carrinho (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    produto_id INTEGER,
-    quantidade INTEGER,
-    preco_unitario REAL,
-    FOREIGN KEY (produto_id) REFERENCES produtos(id)
 );
 
 -- ===============================
