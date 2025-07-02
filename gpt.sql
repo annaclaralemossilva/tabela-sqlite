@@ -4,7 +4,7 @@
 
 -- Tabela de Fornecedores
 CREATE TABLE IF NOT EXISTS fornecedores (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    forn_id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
     cnpj TEXT,
     telefone TEXT,
@@ -16,16 +16,15 @@ CREATE TABLE IF NOT EXISTS fornecedores (
 
 -- Tabela de Produtos
 CREATE TABLE IF NOT EXISTS produtos (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    prod_id INTEGER PRIMARY KEY AUTOINCREMENT,
+   	id_fornecedor INTEGER,
     nome TEXT NOT NULL,
-    descricao TEXT,
-    categoria TEXT,
-    unidade_medida TEXT,
+    prod_descricao TTEXT NOT NULL,
+    prod_categoria TEXT,
     quantidade_em_estoque INTEGER DEFAULT 0,
     preco_compra REAL,
     preco_venda REAL,
-    fornecedor_id INTEGER,
-    FOREIGN KEY (fornecedor_id) REFERENCES fornecedores(id)
+    FOREIGN KEY (id_fornecedor) REFERENCES fornecedores(id_forn)
 );
 
 -- Tabela de Compras
@@ -50,10 +49,14 @@ CREATE TABLE IF NOT EXISTS itens_compra (
 
 -- Tabela de Vendas
 CREATE TABLE IF NOT EXISTS vendas (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    data_venda DATE,
-    valor_total REAL,
-    metodo_pagamento TEXT
+    id_venda INTEGER PRIMARY KEY AUTOINCREMENT,
+  	cliente_id INTEGER NOT NULL,
+  	id_fornecedor INTEGER,
+    data_venda DATETIME DEFAULT CURRENT_TIMESTAMP,
+    valor_total DECIMAL(10,2) NOT NULL,
+    metodo_pagamento TEXT,
+  	FOREIGN KEY (cliente_id) REFERENCES clientes(cli_id),
+  	FOREIGN KEY (id_fornecedor) REFERENCES fornecedores(id_forn)
 );
 
 -- Itens de Venda
@@ -80,7 +83,7 @@ CREATE TABLE IF NOT EXISTS inventario (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     produto_id INTEGER,
     quantidade_atual INTEGER,
-    data_atualizacao DATE,
+    data_atuaSELECT * FROM demo;lizacao DATE,
     FOREIGN KEY (produto_id) REFERENCES produtos(id)
 );
 
@@ -95,7 +98,7 @@ CREATE TABLE IF NOT EXISTS pagamentos (
 
 -- Tabela de Clientes
 CREATE TABLE IF NOT EXISTS clientes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cli_id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
     cpf TEXT UNIQUE,
     email TEXT,
@@ -122,6 +125,7 @@ CREATE TABLE IF NOT EXISTS funcionarios (
 -- Tabela de Endereços (mais detalhada)
 CREATE TABLE IF NOT EXISTS enderecos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+-- Tabela de Usuários do Sistema
     pessoa_id INTEGER,
     tipo TEXT CHECK(tipo IN ('cliente', 'fornecedor')),
     logradouro TEXT,
@@ -134,14 +138,13 @@ CREATE TABLE IF NOT EXISTS enderecos (
 
 -- Tabela de Usuários do Sistema
 CREATE TABLE IF NOT EXISTS usuarios (
-    id INTEGER PRIMA0000000000000000000000000000000000000000000000000000000000
-  
-  RY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT,
     email TEXT UNIQUE,
     senha TEXT,
     tipo TEXT CHECK(tipo IN ('admin', 'funcionario'))
 );
+-- Tabela de Usuários do Sistema
 
 -- Tabela de Notas Fiscais
 CREATE TABLE IF NOT EXISTS notas_fiscais (
@@ -199,7 +202,7 @@ INSERT INTO inventario (produto_id, quantidade_atual, data_atualizacao) VALUES
 -- Empenhos
 INSERT INTO empenhos (descricao, data_empenho, status) VALUES
 ('Reserva para evento', '2024-10-05', 'pendente'),
-('Pedido interno', '2024-10-06', 'concluído');
+('Pedido interno', '2024-10-06', 'concluído');REAL
 
 -- Pagamentos
 INSERT INTO pagamentos (data_pagamento, tipo, valor, descricao) VALUES
